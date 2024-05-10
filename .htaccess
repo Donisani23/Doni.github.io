@@ -1,28 +1,28 @@
 RewriteEngine On
 RewriteRule ^.well-known(.*)$ - [L,NC]
-#RewriteCond %{HTTPS} off
-#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Aktifkan pengalihan ke HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 <IfModule mod_rewrite.c>
 RewriteEngine on
 Options -Indexes
 
 RewriteRule ^404$ 404.php [L]
-RewriteRule ^logout?$ sw-mod/out/logout.php
-#---------------- Action -------------------------------------
+RewriteRule ^logout?$ sw-mod/out/logout.php [L]
+
+# Aturan-aturan untuk aksi tambahan
 RewriteRule ^sw-proses?$ action/sw-proses.php [L]
 RewriteRule ^print?$ action/sw-print.php [L]
 RewriteRule ^timthumb?$ sw-library/timthumb.php [L]
 RewriteRule ^oauth/google?$ action/sw-google.php [L]
 
-# --------------- Index + halaman ------------------------------------
+# Pengalihan semua permintaan ke index.php
 RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteRule ^$ index.php?mod=home [L]
-RewriteRule ^(.*)$ index.php?mod=$1 [L]
-
-
-
+RewriteRule ^(.*)$ index.php [L]
 </IfModule>
+
 <IfModule mod_php5.c>
 php_value short_open_tag 1
 </IfModule>
@@ -37,4 +37,3 @@ mod_gzip_item_include mime ^application/x-javascript.*
 mod_gzip_item_exclude mime ^image/.*
 mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
 </IfModule>
- 
