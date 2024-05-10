@@ -33,7 +33,7 @@ if (!function_exists('base_url')) {
 		$end = $atRoot ? ($atCore ? $core : $hostname) : ($atCore ? $core : $dir);
 		$base_url = sprintf( $tmplt, $http, $hostname, $end );
 	}
-	else $base_url = 'http://localhost/absen';
+	else $base_url = 'https://donisani23.github.io/Doni.github.io/';
 		if ($parse) {
 			$base_url = parse_url($base_url);
 			if (isset($base_url['path'])) if ($base_url['path'] == '/') $base_url['path'] = '';
